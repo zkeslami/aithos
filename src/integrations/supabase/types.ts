@@ -99,7 +99,9 @@ export type Database = {
           custom_goal: string | null
           email_notifications: boolean | null
           gender: string | null
+          goal_categories: Json | null
           goal_category: string | null
+          has_seen_tour: boolean | null
           height_cm: number | null
           id: string
           nickname: string | null
@@ -107,7 +109,7 @@ export type Database = {
           onboarding_completed: boolean | null
           onboarding_completed_at: string | null
           preferred_unit_system: string | null
-          primary_goal: string
+          primary_goal: string | null
           subscription_tier: string | null
           target_date: string | null
           updated_at: string | null
@@ -120,7 +122,9 @@ export type Database = {
           custom_goal?: string | null
           email_notifications?: boolean | null
           gender?: string | null
+          goal_categories?: Json | null
           goal_category?: string | null
+          has_seen_tour?: boolean | null
           height_cm?: number | null
           id: string
           nickname?: string | null
@@ -128,7 +132,7 @@ export type Database = {
           onboarding_completed?: boolean | null
           onboarding_completed_at?: string | null
           preferred_unit_system?: string | null
-          primary_goal: string
+          primary_goal?: string | null
           subscription_tier?: string | null
           target_date?: string | null
           updated_at?: string | null
@@ -141,7 +145,9 @@ export type Database = {
           custom_goal?: string | null
           email_notifications?: boolean | null
           gender?: string | null
+          goal_categories?: Json | null
           goal_category?: string | null
+          has_seen_tour?: boolean | null
           height_cm?: number | null
           id?: string
           nickname?: string | null
@@ -149,7 +155,7 @@ export type Database = {
           onboarding_completed?: boolean | null
           onboarding_completed_at?: string | null
           preferred_unit_system?: string | null
-          primary_goal?: string
+          primary_goal?: string | null
           subscription_tier?: string | null
           target_date?: string | null
           updated_at?: string | null
