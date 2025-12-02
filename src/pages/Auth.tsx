@@ -65,7 +65,8 @@ const Auth = () => {
               <Dumbbell className="w-8 h-8 text-primary-foreground" />
             </div>
           </div>
-          <CardTitle className="text-2xl">Smart Fitness</CardTitle>
+          <CardTitle className="text-2xl">AIthos</CardTitle>
+          <p className="text-xs text-muted-foreground italic">AI + ethos. Your personal AI training philosophy.</p>
           <CardDescription>
             {isLogin ? "Welcome back! Sign in to continue." : "Create your account to get started."}
           </CardDescription>

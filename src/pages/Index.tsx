@@ -224,7 +224,7 @@ const Index = () => {
               <Dumbbell className="w-5 h-5 text-primary-foreground" />
             </div>
             <div>
-              <h1 className="text-xl font-bold">Smart Fitness</h1>
+              <h1 className="text-xl font-bold">AIthos</h1>
               {profile?.custom_goal && (
                 <p className="text-xs text-muted-foreground">
                   Goal: {profile.custom_goal}

@@ -21,8 +21,12 @@ export const WelcomeStep = ({ nickname, onNicknameChange, onNext }: WelcomeStepP
       </div>
 
       <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-cyan-400 bg-clip-text text-transparent">
-        Welcome to Smart Fitness!
+        Welcome to AIthos!
       </h1>
+      
+      <p className="text-sm text-primary/80 mb-2 italic">
+        AI + ethos. Your personal AI training philosophy, shaped around you.
+      </p>
       
       <p className="text-lg text-muted-foreground mb-8 max-w-md">
         Let's personalize your experience in just 2 minutes. We'll set up your goals, 
