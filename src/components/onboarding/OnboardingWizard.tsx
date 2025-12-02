@@ -121,11 +121,11 @@ export const OnboardingWizard = ({ userId, onComplete, onGenerateWorkout }: Onbo
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <div className="w-full max-w-3xl mx-auto">
+      <div className="w-full max-w-3xl mx-auto px-4 sm:px-6">
         <OnboardingProgress currentStep={currentStep} totalSteps={totalSteps} />
       </div>
 
-      <div className="flex-1 w-full max-w-3xl mx-auto py-8">
+      <div className="flex-1 w-full max-w-3xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
         {currentStep === 0 && (
           <WelcomeStep
             nickname={nickname}

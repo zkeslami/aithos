@@ -56,7 +56,7 @@ export const WorkoutStats = ({ refreshTrigger }: WorkoutStatsProps) => {
     <div className="space-y-4">
       <h2 className="text-2xl font-bold">Your Progress</h2>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Workouts</CardTitle>

@@ -120,7 +120,7 @@ export const WorkoutGenerator = ({ onWorkoutGenerated, userGoal, equipment = [],
           <CardContent className="space-y-6 pt-0">
             <div className="space-y-3">
               <Label>Target Muscle Groups</Label>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
                 {MUSCLE_GROUPS.map((muscle) => (
                   <div key={muscle} className="flex items-center space-x-2">
                     <Checkbox

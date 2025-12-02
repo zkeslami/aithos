@@ -41,10 +41,10 @@ export const PersonalDetailsStep = ({
   const years = Array.from({ length: 80 }, (_, i) => currentYear - 10 - i);
 
   return (
-    <div className="flex flex-col min-h-[60vh] px-4 animate-fade-in">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold mb-2">Personal Details</h2>
-        <p className="text-muted-foreground">
+    <div className="flex flex-col min-h-[60vh] animate-fade-in">
+      <div className="text-center mb-6 sm:mb-8">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-2">Personal Details</h2>
+        <p className="text-sm sm:text-base text-muted-foreground">
           Help us estimate your calories burned accurately
         </p>
       </div>
@@ -131,16 +131,16 @@ export const PersonalDetailsStep = ({
         </div>
       </div>
 
-      <div className="flex justify-between mt-auto pt-6">
-        <Button variant="outline" onClick={onBack}>
+      <div className="flex flex-col sm:flex-row justify-between gap-3 mt-auto pt-6">
+        <Button variant="outline" onClick={onBack} className="w-full sm:w-auto order-2 sm:order-1">
           <ArrowLeft className="mr-2 w-4 h-4" />
           Back
         </Button>
-        <div className="flex gap-2">
-          <Button variant="ghost" onClick={onSkip}>
+        <div className="flex flex-col sm:flex-row gap-2 order-1 sm:order-2">
+          <Button variant="ghost" onClick={onSkip} className="w-full sm:w-auto">
             Skip for now
           </Button>
-          <Button onClick={onNext}>
+          <Button onClick={onNext} className="w-full sm:w-auto">
             Next
             <ArrowRight className="ml-2 w-4 h-4" />
           </Button>

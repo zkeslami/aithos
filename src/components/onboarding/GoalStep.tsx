@@ -92,10 +92,10 @@ export const GoalStep = ({
   );
 
   return (
-    <div className="flex flex-col min-h-[60vh] px-4 animate-fade-in">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold mb-2">What's Your Fitness Goal?</h2>
-        <p className="text-muted-foreground">
+    <div className="flex flex-col min-h-[60vh] animate-fade-in">
+      <div className="text-center mb-6 sm:mb-8">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-2">What's Your Fitness Goal?</h2>
+        <p className="text-sm sm:text-base text-muted-foreground">
           This helps us create workouts tailored to YOUR goals
         </p>
       </div>
@@ -106,7 +106,7 @@ export const GoalStep = ({
           onGoalCategoryChange(value);
           onSelectedExampleChange("");
         }}
-        className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6"
+        className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 mb-6"
       >
         {GOAL_CATEGORIES.map((category) => (
           <div key={category.value}>
@@ -167,12 +167,12 @@ export const GoalStep = ({
         </div>
       )}
 
-      <div className="flex justify-between mt-auto pt-6">
-        <Button variant="outline" onClick={onBack}>
+      <div className="flex flex-col-reverse sm:flex-row justify-between gap-3 mt-auto pt-6">
+        <Button variant="outline" onClick={onBack} className="w-full sm:w-auto">
           <ArrowLeft className="mr-2 w-4 h-4" />
           Back
         </Button>
-        <Button onClick={onNext} disabled={!canProceed}>
+        <Button onClick={onNext} disabled={!canProceed} className="w-full sm:w-auto">
           Next
           <ArrowRight className="ml-2 w-4 h-4" />
         </Button>

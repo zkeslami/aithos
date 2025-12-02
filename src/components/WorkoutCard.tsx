@@ -282,8 +282,8 @@ export const WorkoutCard = ({
           </div>
 
           {/* Workout Summary */}
-          <div className="mt-3 p-3 bg-muted/30 rounded-lg border border-border">
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">
+          <div className="mt-3 p-2 sm:p-3 bg-muted/30 rounded-lg border border-border">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 text-xs sm:text-sm">
               <div>
                 <span className="text-muted-foreground">Exercises</span>
                 <p className="font-semibold">{totalExercises}</p>
