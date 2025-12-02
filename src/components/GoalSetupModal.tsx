@@ -101,7 +101,7 @@ export const GoalSetupModal = ({ open, onComplete }: GoalSetupModalProps) => {
     <Dialog open={open} onOpenChange={() => {}}>
       <DialogContent className="sm:max-w-lg max-h-[85vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-2xl">Welcome to Smart Fitness!</DialogTitle>
+          <DialogTitle className="text-2xl">Welcome to AIthos!</DialogTitle>
           <DialogDescription className="text-base">
             What's your fitness goal? This helps us create personalized workouts just for you.
           </DialogDescription>
