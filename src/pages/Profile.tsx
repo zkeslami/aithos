@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Dumbbell } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import { AithosLogo } from "@/components/AithosLogo";
 import { ProfileSidebar } from "@/components/profile/ProfileSidebar";
 import { GeneralSettings } from "@/components/profile/GeneralSettings";
 import { PersonalDetailsForm } from "@/components/profile/PersonalDetailsForm";
@@ -99,22 +100,23 @@ const Profile = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <nav className="border-b border-border">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Button variant="ghost" size="icon" onClick={() => navigate("/")}>
-              <ArrowLeft className="w-5 h-5" />
+        <div className="container mx-auto px-4 py-3 sm:py-4 flex items-center justify-between">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <Button variant="ghost" size="icon" onClick={() => navigate("/")} className="h-8 w-8 sm:h-10 sm:w-10">
+              <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
             </Button>
-            <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-              <Dumbbell className="w-5 h-5 text-primary-foreground" />
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-full flex items-center justify-center">
+              <AithosLogo size={16} className="text-primary-foreground sm:hidden" />
+              <AithosLogo size={20} className="text-primary-foreground hidden sm:block" />
             </div>
-            <h1 className="text-xl font-bold">Settings</h1>
+            <h1 className="text-lg sm:text-xl font-bold">Settings</h1>
           </div>
         </div>
       </nav>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-col md:flex-row gap-8 max-w-5xl mx-auto">
+      <div className="container mx-auto px-4 py-4 sm:py-8">
+        <div className="flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto">
           {/* Sidebar */}
           <ProfileSidebar activeTab={activeTab} onTabChange={setActiveTab} />
 

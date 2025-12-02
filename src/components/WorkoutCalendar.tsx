@@ -155,18 +155,18 @@ export function WorkoutCalendar({ refreshTrigger }: WorkoutCalendarProps) {
       </CardHeader>
       <CardContent className="space-y-4">
         {/* Stats Bar */}
-        <div className="flex justify-between items-center p-3 rounded-lg bg-muted/30">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 p-3 rounded-lg bg-muted/30">
           <div className="flex items-center gap-2">
-            <Trophy className="h-4 w-4 text-yellow-500" />
-            <span className="text-sm text-muted-foreground">Streak</span>
-            <Badge variant="secondary" className="font-bold">
+            <Trophy className="h-4 w-4 text-yellow-500 flex-shrink-0" />
+            <span className="text-xs sm:text-sm text-muted-foreground">Streak</span>
+            <Badge variant="secondary" className="font-bold text-xs">
               {streak} days
             </Badge>
           </div>
           <div className="flex items-center gap-2">
-            <Flame className="h-4 w-4 text-orange-500" />
-            <span className="text-sm text-muted-foreground">This month</span>
-            <Badge variant="outline">
+            <Flame className="h-4 w-4 text-orange-500 flex-shrink-0" />
+            <span className="text-xs sm:text-sm text-muted-foreground">This month</span>
+            <Badge variant="outline" className="text-xs">
               {monthlyStats.workouts} workouts
             </Badge>
           </div>

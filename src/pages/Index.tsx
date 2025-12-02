@@ -219,28 +219,38 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <nav className="border-b border-border">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-              <AithosLogo size={20} className="text-primary-foreground" />
+        <div className="container mx-auto px-4 py-3 sm:py-4 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+              <AithosLogo size={16} className="text-primary-foreground sm:hidden" />
+              <AithosLogo size={20} className="text-primary-foreground hidden sm:block" />
             </div>
-            <div>
-              <h1 className="text-xl font-bold">AIthos</h1>
+            <div className="min-w-0">
+              <h1 className="text-lg sm:text-xl font-bold">AIthos</h1>
               {profile?.custom_goal && (
-                <p className="text-xs text-muted-foreground">
+                <p className="text-xs text-muted-foreground truncate max-w-[120px] sm:max-w-none">
                   Goal: {profile.custom_goal}
                 </p>
               )}
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
             {user && (
               <>
                 <Button 
                   variant="ghost" 
+                  size="icon"
+                  onClick={() => navigate("/profile?tab=subscription")}
+                  className="text-primary hover:text-primary hover:bg-primary/10 sm:hidden"
+                  title="Upgrade"
+                >
+                  <Sparkles className="w-4 h-4" />
+                </Button>
+                <Button 
+                  variant="ghost" 
                   size="sm"
                   onClick={() => navigate("/profile?tab=subscription")}
-                  className="text-primary hover:text-primary hover:bg-primary/10 hover:ring-1 hover:ring-primary/50 transition-all"
+                  className="text-primary hover:text-primary hover:bg-primary/10 hover:ring-1 hover:ring-primary/50 transition-all hidden sm:flex"
                 >
                   <Sparkles className="w-4 h-4 mr-1" />
                   Upgrade
@@ -253,20 +263,25 @@ const Index = () => {
                 >
                   <User className="w-4 h-4" />
                 </Button>
-                <Button variant="ghost" size="icon" onClick={() => setShowEquipmentModal(true)}>
+                <Button variant="ghost" size="icon" onClick={() => setShowEquipmentModal(true)} className="hidden sm:flex">
                   <Settings className="w-4 h-4" />
                 </Button>
               </>
             )}
             {user ? (
-              <Button variant="ghost" size="sm" onClick={handleLogout}>
+              <Button variant="ghost" size="icon" onClick={handleLogout} className="sm:hidden" title="Logout">
+                <LogOut className="w-4 h-4" />
+              </Button>
+            ) : null}
+            {user ? (
+              <Button variant="ghost" size="sm" onClick={handleLogout} className="hidden sm:flex">
                 <LogOut className="w-4 h-4 mr-2" />
                 Logout
               </Button>
             ) : (
               <Button variant="default" size="sm" onClick={() => navigate("/auth")}>
-                <LogIn className="w-4 h-4 mr-2" />
-                Sign In
+                <LogIn className="w-4 h-4 sm:mr-2" />
+                <span className="hidden sm:inline">Sign In</span>
               </Button>
             )}
           </div>
@@ -276,11 +291,11 @@ const Index = () => {
       {/* Guest Banner */}
       {!user && (
         <div className="bg-primary/10 border-b border-primary/20">
-          <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-            <p className="text-sm text-muted-foreground">
+          <div className="container mx-auto px-4 py-2 sm:py-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+            <p className="text-xs sm:text-sm text-muted-foreground">
               👋 Try it out! Sign in to save your workouts and track progress.
             </p>
-            <Button variant="link" size="sm" onClick={() => navigate("/auth")}>
+            <Button variant="link" size="sm" onClick={() => navigate("/auth")} className="p-0 h-auto sm:p-2 sm:h-auto">
               Sign In →
             </Button>
           </div>
@@ -333,9 +348,9 @@ const Index = () => {
         </div>
       )}
 
-      <main className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-8">
+      <main className="container mx-auto px-4 py-4 sm:py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+          <div className="lg:col-span-2 space-y-4 sm:space-y-6 lg:space-y-8">
             {/* Today's Suggestion - only for logged in users */}
             <div ref={workoutRef} className="scroll-mt-20">
               {user && <DailySuggestion onStartWorkout={handleLogWorkout} />}
@@ -421,7 +436,7 @@ const Index = () => {
 
           {/* Sidebar - only for logged in users */}
           {user && (
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6 order-first lg:order-last">
               <WeeklyGoalTracker refreshTrigger={refreshStats} />
               <div ref={calendarRef} className="scroll-mt-20">
                 <WorkoutCalendar refreshTrigger={refreshStats} />

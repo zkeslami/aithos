@@ -90,15 +90,15 @@ export const EquipmentStep = ({
   };
 
   return (
-    <div className="flex flex-col min-h-[60vh] px-4 animate-fade-in">
-      <div className="text-center mb-6">
-        <h2 className="text-3xl font-bold mb-2">Your Equipment</h2>
-        <p className="text-muted-foreground">
+    <div className="flex flex-col min-h-[60vh] animate-fade-in">
+      <div className="text-center mb-4 sm:mb-6">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-2">Your Equipment</h2>
+        <p className="text-sm sm:text-base text-muted-foreground">
           We'll only suggest exercises you can actually do
         </p>
       </div>
 
-      <div className="flex flex-wrap gap-2 mb-6 justify-center">
+      <div className="flex flex-wrap gap-2 mb-4 sm:mb-6 justify-center">
         <Button
           variant="outline"
           size="sm"
@@ -129,13 +129,13 @@ export const EquipmentStep = ({
         </Button>
       </div>
 
-      <div className="flex-1 overflow-y-auto max-h-[40vh] space-y-6 mb-6">
+      <div className="flex-1 overflow-y-auto max-h-[40vh] space-y-4 sm:space-y-6 mb-4 sm:mb-6">
         {Object.entries(EQUIPMENT_CATEGORIES).map(([category, items]) => (
           <div key={category}>
-            <h3 className="font-semibold text-sm text-muted-foreground mb-3 uppercase tracking-wide">
+            <h3 className="font-semibold text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3 uppercase tracking-wide">
               {category}
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
               {items.map((item) => (
                 <div
                   key={item}
@@ -164,16 +164,16 @@ export const EquipmentStep = ({
         {selectedEquipment.length} items selected
       </div>
 
-      <div className="flex justify-between pt-4 border-t border-border">
-        <Button variant="outline" onClick={onBack}>
+      <div className="flex flex-col sm:flex-row justify-between gap-3 pt-4 border-t border-border">
+        <Button variant="outline" onClick={onBack} className="w-full sm:w-auto order-2 sm:order-1">
           <ArrowLeft className="mr-2 w-4 h-4" />
           Back
         </Button>
-        <div className="flex gap-2">
-          <Button variant="ghost" onClick={onSkip}>
+        <div className="flex flex-col sm:flex-row gap-2 order-1 sm:order-2">
+          <Button variant="ghost" onClick={onSkip} className="w-full sm:w-auto">
             Skip for now
           </Button>
-          <Button onClick={onNext}>
+          <Button onClick={onNext} className="w-full sm:w-auto">
             Next
             <ArrowRight className="ml-2 w-4 h-4" />
           </Button>
