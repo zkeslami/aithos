@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
 import { 
   Clock, Zap, Pencil, Trash2, X, Check, ChevronDown, ChevronRight,
   Dumbbell, Heart, Move, Target, Scale, ExternalLink, Star, Flame
@@ -102,6 +103,7 @@ export const WorkoutCard = ({
   const [completedExercises, setCompletedExercises] = useState<Record<string, boolean>>({});
   const [removedExercises, setRemovedExercises] = useState<Set<string>>(new Set());
   const [isFavorite, setIsFavorite] = useState(workout.is_favorite || false);
+  const [editedTitle, setEditedTitle] = useState(workout.title);
   const [openSections, setOpenSections] = useState<Record<number, boolean>>(() => 
     Object.fromEntries(workout.sections.map((_, idx) => [idx, false]))
   );
@@ -137,6 +139,7 @@ export const WorkoutCard = ({
 
     return {
       ...workout,
+      title: editedTitle,
       sections: modifiedSections,
     };
   };
@@ -153,6 +156,7 @@ export const WorkoutCard = ({
     setIsEditing(false);
     setRemovedExercises(new Set());
     setCompletedExercises({});
+    setEditedTitle(workout.title);
   };
 
   const toggleSection = (idx: number) => {
@@ -211,7 +215,16 @@ export const WorkoutCard = ({
         <CardHeader>
           <div className="flex items-start justify-between">
             <div className="space-y-1 flex-1">
-              <CardTitle className="text-xl">{workout.title}</CardTitle>
+              {isEditing ? (
+                <Input
+                  value={editedTitle}
+                  onChange={(e) => setEditedTitle(e.target.value)}
+                  className="text-xl font-semibold h-auto py-1 px-2"
+                  placeholder="Workout title"
+                />
+              ) : (
+                <CardTitle className="text-xl">{workout.title}</CardTitle>
+              )}
               <CardDescription className="flex items-center gap-2 flex-wrap">
                 <Badge variant="secondary">{workout.type}</Badge>
                 {workout.source === "manual" && (

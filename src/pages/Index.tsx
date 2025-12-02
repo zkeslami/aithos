@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -15,7 +15,8 @@ import { WorkoutStats } from "@/components/WorkoutStats";
 import { WorkoutHistory } from "@/components/WorkoutHistory";
 import { WorkoutCalendar } from "@/components/WorkoutCalendar";
 import { FavoriteWorkouts } from "@/components/FavoriteWorkouts";
-import { Dumbbell, LogOut, Settings, Plus, LogIn, User } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Dumbbell, LogOut, Settings, Plus, LogIn, User, Zap, Star, BarChart3, History, Calendar } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
 const Index = () => {
@@ -31,6 +32,26 @@ const Index = () => {
   const [showLogModal, setShowLogModal] = useState(false);
   const [workoutToLog, setWorkoutToLog] = useState<any>(null);
   const [refreshStats, setRefreshStats] = useState(0);
+  const [activeTab, setActiveTab] = useState("workout");
+
+  // Refs for scrolling
+  const workoutRef = useRef<HTMLDivElement>(null);
+  const favoritesRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
+  const historyRef = useRef<HTMLDivElement>(null);
+  const calendarRef = useRef<HTMLDivElement>(null);
+
+  const scrollToSection = (section: string) => {
+    setActiveTab(section);
+    const refs: Record<string, React.RefObject<HTMLDivElement>> = {
+      workout: workoutRef,
+      favorites: favoritesRef,
+      stats: statsRef,
+      history: historyRef,
+      calendar: calendarRef,
+    };
+    refs[section]?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -230,27 +251,73 @@ const Index = () => {
         </div>
       )}
 
+      {/* Navigation Tabs */}
+      {user && (
+        <div className="sticky top-0 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
+          <div className="container mx-auto px-4">
+            <Tabs value={activeTab} onValueChange={scrollToSection}>
+              <TabsList className="h-12 w-full justify-start bg-transparent gap-1 overflow-x-auto">
+                <TabsTrigger value="workout" className="data-[state=active]:bg-primary/10 gap-2">
+                  <Zap className="w-4 h-4" />
+                  <span className="hidden sm:inline">Workout</span>
+                </TabsTrigger>
+                <TabsTrigger value="favorites" className="data-[state=active]:bg-primary/10 gap-2">
+                  <Star className="w-4 h-4" />
+                  <span className="hidden sm:inline">Favorites</span>
+                </TabsTrigger>
+                <TabsTrigger value="stats" className="data-[state=active]:bg-primary/10 gap-2">
+                  <BarChart3 className="w-4 h-4" />
+                  <span className="hidden sm:inline">Stats</span>
+                </TabsTrigger>
+                <TabsTrigger value="history" className="data-[state=active]:bg-primary/10 gap-2">
+                  <History className="w-4 h-4" />
+                  <span className="hidden sm:inline">History</span>
+                </TabsTrigger>
+                <TabsTrigger value="calendar" className="data-[state=active]:bg-primary/10 gap-2">
+                  <Calendar className="w-4 h-4" />
+                  <span className="hidden sm:inline">Calendar</span>
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </div>
+        </div>
+      )}
+
       <main className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-8">
             {/* Generated Workout Display */}
-            {generatedWorkout && (
-              <div>
-                <h2 className="text-2xl font-bold mb-4">Your Generated Workout</h2>
-                <WorkoutCard 
-                  workout={generatedWorkout} 
-                  onLog={handleLogWorkout}
-                  onDismiss={() => setGeneratedWorkout(null)}
-                />
-              </div>
-            )}
+            <div ref={workoutRef} className="scroll-mt-20">
+              {generatedWorkout ? (
+                <div>
+                  <h2 className="text-2xl font-bold mb-4">Your Generated Workout</h2>
+                  <WorkoutCard 
+                    workout={generatedWorkout} 
+                    onLog={handleLogWorkout}
+                    onDismiss={() => setGeneratedWorkout(null)}
+                  />
+                </div>
+              ) : (
+                <Card className="border-dashed">
+                  <CardContent className="p-8 text-center">
+                    <Zap className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
+                    <h3 className="text-lg font-semibold mb-2">No Workout Generated</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Use the generator on the right to create a personalized workout
+                    </p>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
 
             {/* Favorite Workouts Quick Start */}
             {user && (
-              <FavoriteWorkouts 
-                onQuickStart={handleQuickStart}
-                refreshTrigger={refreshStats}
-              />
+              <div ref={favoritesRef} className="scroll-mt-20">
+                <FavoriteWorkouts 
+                  onQuickStart={handleQuickStart}
+                  refreshTrigger={refreshStats}
+                />
+              </div>
             )}
 
             {/* Daily Suggestion - only for logged in users */}
@@ -279,8 +346,12 @@ const Index = () => {
             {/* Stats and History - only for logged in users */}
             {user && (
               <>
-                <WorkoutStats refreshTrigger={refreshStats} />
-                <WorkoutHistory refreshTrigger={refreshStats} />
+                <div ref={statsRef} className="scroll-mt-20">
+                  <WorkoutStats refreshTrigger={refreshStats} />
+                </div>
+                <div ref={historyRef} className="scroll-mt-20">
+                  <WorkoutHistory refreshTrigger={refreshStats} />
+                </div>
               </>
             )}
 
@@ -309,7 +380,11 @@ const Index = () => {
             />
 
             {/* Workout Calendar - only for logged in users */}
-            {user && <WorkoutCalendar refreshTrigger={refreshStats} />}
+            {user && (
+              <div ref={calendarRef} className="scroll-mt-20">
+                <WorkoutCalendar refreshTrigger={refreshStats} />
+              </div>
+            )}
           </div>
         </div>
       </main>
